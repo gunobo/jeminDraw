@@ -1,0 +1,200 @@
+/* ─── Wrapper ────────────────────────────────────── */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 4px 0;
+}
+
+/* ─── Toolbar (화면 전용) ────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.backBtn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 9px 16px;
+  color: rgba(248,250,252,0.6);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.backBtn:hover { color: #f8fafc; background: rgba(255,255,255,0.1); }
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.actionBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.btnIcon { font-size: 1rem; }
+
+.pdf {
+  background: linear-gradient(135deg, #e11d48, #f43f5e);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(244,63,94,0.4), 0 4px 12px rgba(0,0,0,0.4);
+}
+.pdf:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(244,63,94,0.6), 0 6px 16px rgba(0,0,0,0.5);
+}
+
+.hwp {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(16,185,129,0.35), 0 4px 12px rgba(0,0,0,0.4);
+}
+.hwp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(16,185,129,0.55), 0 6px 16px rgba(0,0,0,0.5);
+}
+
+.docs {
+  background: linear-gradient(135deg, #1d6fdf, #2563eb);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(37,99,235,0.4), 0 4px 12px rgba(0,0,0,0.4);
+}
+.docs:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(37,99,235,0.6), 0 6px 16px rgba(0,0,0,0.5);
+}
+.docs.done {
+  background: linear-gradient(135deg, #059669, #10b981);
+  box-shadow: 0 0 20px rgba(16,185,129,0.4);
+}
+
+/* ─── Sheet (결과지) ─────────────────────────────── */
+.sheet {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 32px;
+  backdrop-filter: blur(16px);
+}
+
+.sheetHeader {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sheetTitle {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+
+.sheetMeta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: rgba(248,250,252,0.5);
+  font-weight: 500;
+}
+
+/* ─── Groups Grid ────────────────────────────────── */
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  gap: 16px;
+}
+
+.groupCard {
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 4px solid var(--c, #22d3ee);
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.03);
+  transition: background 0.15s;
+}
+.groupCard:hover { background: rgba(255,255,255,0.06); }
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.groupNum {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--c, #22d3ee);
+}
+
+.groupCount {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(248,250,252,0.4);
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 2px 9px;
+}
+
+.memberList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.memberChip {
+  color: #fff;
+  border-radius: 8px;
+  padding: 4px 11px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ─── Footer ─────────────────────────────────────── */
+.sheetFooter {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.75rem;
+  color: rgba(248,250,252,0.25);
+  text-align: center;
+}
+
+/* 인쇄는 팝업 창으로 처리하므로 @media print 불필요 */
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 600px) {
+  .groupsGrid { grid-template-columns: 1fr !important; }
+  .sheet      { padding: 20px 16px; }
+  .toolbar    { flex-direction: column; align-items: stretch; }
+  .backBtn    { text-align: center; }
+  .actions    { justify-content: center; }
+}

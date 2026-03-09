@@ -1,0 +1,55 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 0 4px;
+  margin: 100px;
+}
+
+/* ─── Info Bar ──────────────────────────────────── */
+.infoBar {
+  display: flex;
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.infoItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 12px;
+}
+
+.infoDivider {
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+
+.infoLabel {
+  font-size: 0.68rem;
+  color: rgba(248,250,252,0.4);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.infoValue {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #22d3ee;
+}
+
+/* ─── Description ───────────────────────────────── */
+.desc {
+  font-size: 0.85rem;
+  color: rgba(248,250,252,0.38);
+  text-align: center;
+  line-height: 1.6;
+}

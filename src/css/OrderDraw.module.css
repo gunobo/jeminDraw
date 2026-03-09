@@ -1,0 +1,64 @@
+/* ─── Order List ────────────────────────────────── */
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 11px 14px;
+  animation: item-in 0.3s ease both;
+  transition: background 0.15s;
+}
+
+.item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+@keyframes item-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.rank {
+  font-size: 0.75rem;
+  color: rgba(248,250,252,0.35);
+  font-weight: 700;
+  min-width: 18px;
+  text-align: right;
+}
+
+.num {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8fafc;
+  flex: 1;
+}
+
+.badge {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* ─── Empty State ───────────────────────────────── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 0 20px;
+  color: rgba(248,250,252,0.3);
+}
+.emptyIcon { font-size: 3rem; opacity: 0.35; }
+.emptyState p { font-size: 0.9rem; }
+
+/* ─── Responsive ────────────────────────────────── */
+@media (max-width: 500px) {
+  .list { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+}
