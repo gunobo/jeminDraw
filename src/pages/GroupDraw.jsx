@@ -60,7 +60,8 @@ export default function GroupDraw() {
       </button>
 
       <p className={s.desc}>
-        번호가 한 장씩 공개되며 각 모둠으로 배정됩니다
+        번호가 한 장씩 공개되며 각 모둠으로 배정됩니다 <br/>
+        Create By 임제민 | CSS Power By Claude.ai
       </p>
     </div>
   )

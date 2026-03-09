@@ -247,6 +247,10 @@
   min-height: 320px;
 }
 
+.CreateBy {
+  font-size: 5px !important;
+}
+
 /* ─── Responsive ─────────────────────────────────── */
 @media (max-width: 680px) {
   .topBar      { flex-direction: column; align-items: flex-start; }
