@@ -99,7 +99,10 @@ export default function IndividualDraw() {
       {!displayNum && (
         <div className={s.emptyState}>
           <div className={s.emptyIcon}>🎯</div>
-          <p>버튼을 눌러 학생을 뽑아보세요</p>
+          <p>
+            버튼을 눌러 학생을 뽑아보세요. <br/>
+            Create By 임제민 | CSS Power By Claude.ai
+          </p>
         </div>
       )}
     </div>

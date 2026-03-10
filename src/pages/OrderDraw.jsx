@@ -59,7 +59,10 @@ export default function OrderDraw() {
       {!order && (
         <div className={s.emptyState}>
           <div className={s.emptyIcon}>📋</div>
-          <p>버튼을 눌러 발표 순서를 정해보세요</p>
+          <p>
+            버튼을 눌러 발표 순서를 정해보세요 <br/>
+            Create By 임제민 | CSS Power By Claude.ai
+          </p>
         </div>
       )}
     </div>
