@@ -57,7 +57,7 @@ export default function GroupExport() {
         </div>`
     }).join('')
 
-    const cols = Math.min(groups.length, 2)
+    const rows = Math.ceil(groups.length / 2)
 
     const html = `<!DOCTYPE html>
 <html lang="ko">
@@ -77,7 +77,9 @@ export default function GroupExport() {
     .meta   { display: flex; gap: 18px; font-size: 0.82rem; color: #6b7280; }
     .grid   {
       display: grid;
-      grid-template-columns: repeat(${cols}, 1fr);
+      grid-template-rows: repeat(${rows}, auto);
+      grid-auto-columns: 1fr;
+      grid-auto-flow: column;
       gap: 14px;
     }
     .card {
@@ -194,7 +196,7 @@ export default function GroupExport() {
           </div>
         </div>
 
-        <div className={s.groupsGrid} style={{ '--cols': Math.min(groups.length, 2) }}>
+        <div className={s.groupsGrid} style={{ '--rows': Math.ceil(groups.length / 2) }}>
           {groups.map((group, idx) => {
             const color = GROUP_COLORS[idx % GROUP_COLORS.length]
             const sorted = [...group].sort((a, b) => a - b)

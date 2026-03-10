@@ -124,10 +124,12 @@
   font-weight: 500;
 }
 
-/* ─── Groups Grid ────────────────────────────────── */
+/* ─── Groups Grid (열 우선: 1 3 / 2 4) ──────────── */
 .groupsGrid {
   display: grid;
-  grid-template-columns: repeat(var(--cols, 2), 1fr);
+  grid-template-rows: repeat(var(--rows, 2), auto);
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
   gap: 16px;
 }
 

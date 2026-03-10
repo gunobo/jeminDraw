@@ -20,7 +20,6 @@ function buildSequence(groups) {
   const all = groups.flatMap((group, groupIdx) =>
     group.map(num => ({ num, groupIdx }))
   )
-  // Fisher-Yates shuffle for random reveal order
   for (let i = all.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[all[i], all[j]] = [all[j], all[i]]
@@ -29,19 +28,17 @@ function buildSequence(groups) {
 }
 
 export default function GroupResult() {
-  const { groups } = useDraw()   // ← Context 변수에서 읽기
+  const { groups } = useDraw()
   const navigate = useNavigate()
 
   const seqRef = useRef(buildSequence(groups))
   const sequence = seqRef.current
   const total = sequence.length
 
-  // cardIdx: which card is showing (-1 = none)
-  // animPhase: 'in' | 'out'
   const [cardIdx, setCardIdx]             = useState(-1)
   const [animPhase, setAnimPhase]         = useState('in')
-  const [placed, setPlaced]               = useState([])       // { num, groupIdx }[]
-  const [justPlacedGroup, setJustPlaced]  = useState(null)     // groupIdx currently flashing
+  const [placed, setPlaced]               = useState([])
+  const [justPlacedGroup, setJustPlaced]  = useState(null)
   const [done, setDone]                   = useState(false)
 
   const timersRef = useRef([])
@@ -56,7 +53,6 @@ export default function GroupResult() {
     timersRef.current.push(id)
   }
 
-  // Kick off card reveal sequence
   const runCard = (idx) => {
     if (idx >= total) {
       setDone(true)
@@ -67,13 +63,9 @@ export default function GroupResult() {
     setCardIdx(idx)
     setAnimPhase('in')
 
-    // card-in plays for ~380ms, stay visible until t=420ms
     at(() => {
-      // Start exit: card shrinks toward container
       setAnimPhase('out')
-      setJustPlaced(sequence[idx].groupIdx)  // container flashes
-
-      // card-out plays for ~240ms; place number mid-exit
+      setJustPlaced(sequence[idx].groupIdx)  
       at(() => {
         setPlaced(prev => [...prev, sequence[idx]])
         setJustPlaced(null)
@@ -156,7 +148,7 @@ export default function GroupResult() {
       )}
 
       {/* ── 2×2 Group Containers ── */}
-      <div className={s.groupsGrid}>
+      <div className={s.groupsGrid} style={{ '--rows': Math.ceil(groups.length / 2) }}>
         {groups.map((group, idx) => {
           const color = GROUP_COLORS[idx % GROUP_COLORS.length]
           const members = placed
