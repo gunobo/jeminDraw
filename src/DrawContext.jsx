@@ -15,11 +15,35 @@ export function DrawProvider({ children }) {
   // ── 순서 뽑기 결과 ──────────────────────────────
   const [orderResult, setOrderResult] = useState([]) // [7, 3, 12, ...]
 
+  // ── 모둠 페어링 히스토리 ─────────────────────────
+  const [pairingHistory, setPairingHistory] = useState({}) // {"1-3": 2, ...} 같은 모둠 횟수
+
   // ── 개인 뽑기 히스토리 ───────────────────────────
   const [individualHistory, setIndividualHistory] = useState([]) // [5, 12, 3, ...]
 
   /** 모둠 뽑기 결과 저장 */
   const saveGroups = (newGroups) => setGroups(newGroups)
+
+  /** 모둠 페어링 기록 갱신 */
+  const updatePairingHistory = (groups) => {
+    setPairingHistory(prev => {
+      const next = { ...prev }
+      for (const group of groups) {
+        for (let i = 0; i < group.length; i++) {
+          for (let j = i + 1; j < group.length; j++) {
+            const key = group[i] < group[j]
+              ? `${group[i]}-${group[j]}`
+              : `${group[j]}-${group[i]}`
+            next[key] = (next[key] || 0) + 1
+          }
+        }
+      }
+      return next
+    })
+  }
+
+  /** 페어링 히스토리 초기화 */
+  const resetPairingHistory = () => setPairingHistory({})
 
   /** 순서 뽑기 결과 저장 */
   const saveOrder = (result) => setOrderResult(result)
@@ -36,6 +60,9 @@ export function DrawProvider({ children }) {
       /* 모둠 */
       groups,
       saveGroups,
+      pairingHistory,
+      updatePairingHistory,
+      resetPairingHistory,
       /* 순서 */
       orderResult,
       saveOrder,

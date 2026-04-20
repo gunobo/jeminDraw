@@ -12,21 +12,62 @@ function shuffle(arr) {
   return a
 }
 
+function pairKey(a, b) {
+  return a < b ? `${a}-${b}` : `${b}-${a}`
+}
+
+function groupScore(groups, history) {
+  let total = 0
+  for (const group of groups) {
+    for (let i = 0; i < group.length; i++) {
+      for (let j = i + 1; j < group.length; j++) {
+        total += history[pairKey(group[i], group[j])] || 0
+      }
+    }
+  }
+  return total
+}
+
+function smartGroup(students, numGroups, history) {
+  const shuffled = shuffle(students)
+  const groups = Array.from({ length: numGroups }, () => [])
+  shuffled.forEach((s, i) => groups[i % numGroups].push(s))
+
+  // 반복 페어 최소화를 위한 그리디 스왑
+  let best = groupScore(groups, history)
+  for (let iter = 0; iter < 300; iter++) {
+    const g1 = Math.floor(Math.random() * numGroups)
+    let g2 = Math.floor(Math.random() * (numGroups - 1))
+    if (g2 >= g1) g2++
+
+    const i1 = Math.floor(Math.random() * groups[g1].length)
+    const i2 = Math.floor(Math.random() * groups[g2].length)
+    ;[groups[g1][i1], groups[g2][i2]] = [groups[g2][i2], groups[g1][i1]]
+
+    const score = groupScore(groups, history)
+    if (score < best) {
+      best = score
+    } else {
+      ;[groups[g1][i1], groups[g2][i2]] = [groups[g2][i2], groups[g1][i1]]
+    }
+  }
+  return groups
+}
+
 export default function GroupDraw() {
   const { numGroups, availableStudents } = useSettings()
-  const { saveGroups } = useDraw()
+  const { saveGroups, pairingHistory, updatePairingHistory, resetPairingHistory } = useDraw()
   const navigate = useNavigate()
 
   const draw = () => {
     if (availableStudents.length === 0) return
-    const shuffled = shuffle(availableStudents)
-    const groups = Array.from({ length: numGroups }, () => [])
-    shuffled.forEach((student, idx) => {
-      groups[idx % numGroups].push(student)
-    })
-    saveGroups(groups)           // ← Context 변수에 저장
-    navigate('/group/result')    // ← state 없이 이동
+    const groups = smartGroup(availableStudents, numGroups, pairingHistory)
+    updatePairingHistory(groups)
+    saveGroups(groups)
+    navigate('/group/result')
   }
+
+  const historyCount = Object.keys(pairingHistory).length
 
   const perGroupMin = availableStudents.length > 0 ? Math.floor(availableStudents.length / numGroups) : 0
   const perGroupMax = availableStudents.length > 0 ? Math.ceil(availableStudents.length / numGroups) : 0
@@ -59,8 +100,17 @@ export default function GroupDraw() {
         🎲 모둠 뽑기!
       </button>
 
+      {historyCount > 0 && (
+        <button className={s.resetHistory} onClick={resetPairingHistory}>
+          기록 초기화
+        </button>
+      )}
+
       <p className={s.desc}>
-        번호가 한 장씩 공개되며 각 모둠으로 배정됩니다 <br/>
+        {historyCount > 0
+          ? '이전 모둠과 겹치지 않도록 배정됩니다'
+          : '번호가 한 장씩 공개되며 각 모둠으로 배정됩니다'
+        }<br/>
         Create By 임제민 | CSS Power By Claude.ai
       </p>
     </div>

@@ -46,6 +46,24 @@
   color: #22d3ee;
 }
 
+/* ─── Reset History ─────────────────────────────── */
+.resetHistory {
+  padding: 8px 18px;
+  border: 1px solid rgba(248,113,113,0.25);
+  border-radius: 20px;
+  background: rgba(248,113,113,0.07);
+  color: rgba(248,113,113,0.7);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.resetHistory:hover {
+  border-color: rgba(248,113,113,0.5);
+  color: #f87171;
+  background: rgba(248,113,113,0.12);
+}
+
 /* ─── Description ───────────────────────────────── */
 .desc {
   font-size: 0.85rem;

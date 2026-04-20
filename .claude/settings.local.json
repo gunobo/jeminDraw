@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s http://localhost:5173/)",
+      "Bash(curl -sv --max-time 5 http://localhost:5173/)",
+      "Bash(kill 25311)",
+      "Bash(chmod +x /Users/imjemin/jemindraw/deploy/scripts/deploy-frontend.sh)"
     ]
   }
 }
