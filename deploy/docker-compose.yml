@@ -8,17 +8,9 @@ services:
 
   nginx:
     build:
-      context: .         # ~ (홈 디렉토리)
+      context: .
       dockerfile: Dockerfile.nginx
     restart: unless-stopped
-    networks:
-      - internal
-
-  backend:
-    build: ./backend
-    restart: unless-stopped
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
     networks:
       - internal
 
